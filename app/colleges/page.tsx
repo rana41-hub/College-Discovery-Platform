@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import CollegeFilters from "./CollegeFilters";
 import CollegeGrid from "./CollegeGrid";
 
+export const dynamic = "force-dynamic";
+
 export default function CollegesPage({
   searchParams,
 }: {

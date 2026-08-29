@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import SaveCollegeButton from "./SaveCollegeButton";
 
+export const dynamic = "force-dynamic";
+
 async function getCollege(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/colleges/${id}`, {
     cache: "no-store",

@@ -1,5 +1,7 @@
 import SaveComparisonButton from "./SaveComparisonButton";
 
+export const dynamic = "force-dynamic";
+
 async function getCompareColleges(ids: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_APP_URL}/api/colleges/compare?ids=${ids}`,
