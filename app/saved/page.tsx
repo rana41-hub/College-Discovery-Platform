@@ -27,8 +27,6 @@ export default async function SavedPage() {
         }),
     ]);
 
-    // Comparisons only store college IDs, so fetch the actual college names
-    // for display. Done as one batched query rather than N+1 per comparison.
     const allComparisonIds = Array.from(
         new Set(savedComparisons.flatMap((c) => c.collegeIds))
     );

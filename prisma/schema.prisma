@@ -27,7 +27,6 @@ model College {
   overview       String   @db.Text
   courses        String[]
 
-  // Placements — structured fields
   avgPackage     Int?
   highestPackage Int?
   topRecruiters  String[]
