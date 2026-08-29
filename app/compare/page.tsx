@@ -52,31 +52,37 @@ export default async function ComparePage({
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="max-w-5xl mx-auto px-4 py-10">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Compare Colleges</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Compare Colleges</h1>
         <SaveComparisonButton collegeIds={colleges.map((c: any) => c.id)} />
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
+        <table className="w-full border-collapse border border-gray-200 rounded-2xl overflow-hidden">
+          <thead className="bg-gray-50">
             <tr>
-              <th className="text-left p-3 border-b w-40"></th>
+              <th className="text-left p-4 border-b border-gray-200 w-40"></th>
               {colleges.map((c: any) => (
-                <th key={c.id} className="text-left p-3 border-b font-semibold">
+                <th key={c.id} className="text-left p-4 border-b border-gray-200 font-semibold text-gray-900">
                   {c.name}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white">
             {rows.map((row) => (
-              <tr key={row.key}>
-                <td className="p-3 border-b text-sm text-gray-500 font-medium">{row.label}</td>
+              <tr key={row.key} className="hover:bg-gray-50/50">
+                <td className="p-4 border-b border-gray-200 text-sm text-gray-500 font-medium">{row.label}</td>
                 {colleges.map((c: any) => (
-                  <td key={c.id} className="p-3 border-b text-sm">
-                    {row.format ? row.format(c[row.key]) : c[row.key] || "—"}
+                  <td key={c.id} className="p-4 border-b border-gray-200 text-sm text-gray-900">
+                    {row.key === "rating" ? (
+                      <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full text-xs font-medium">
+                        {row.format ? row.format(c[row.key]) : c[row.key]}
+                      </span>
+                    ) : (
+                      row.format ? row.format(c[row.key]) : c[row.key] || "—"
+                    )}
                   </td>
                 ))}
               </tr>

@@ -25,7 +25,6 @@ model College {
   fees           Int
   rating         Float
   overview       String   @db.Text
-  courses        String[]
 
   avgPackage     Int?
   highestPackage Int?
@@ -34,11 +33,25 @@ model College {
 
   createdAt      DateTime @default(now())
 
+  courses  Course[]
   reviews  Review[]
   savedBy  SavedCollege[]
 
   @@index([location])
   @@index([fees])
+}
+
+model Course {
+  id        String   @id @default(cuid())
+  name      String
+  fees      Int
+  duration  String?
+  createdAt DateTime @default(now())
+
+  college   College  @relation(fields: [collegeId], references: [id])
+  collegeId String
+
+  @@index([collegeId])
 }
 
 model Review {
