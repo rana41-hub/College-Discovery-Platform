@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import SaveCollegeButton from "./SaveCollegeButton";
+import BackButton from "@/app/BackButton";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,7 @@ export default async function CollegeDetailPage({ params }: { params: { id: stri
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
+      <BackButton />
       <div className="flex justify-between items-start mb-2">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">{college.name}</h1>

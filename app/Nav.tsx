@@ -13,20 +13,20 @@ export default function Nav() {
       </Link>
 
       <div className="flex items-center gap-4 text-sm">
-        <Link href="/colleges">Colleges</Link>
+        <Link href="/colleges" className="transition-colors hover:text-gray-600">Colleges</Link>
 
         {status === "loading" ? null : session ? (
           <>
-            <Link href="/saved">Saved</Link>
+            <Link href="/saved" className="transition-colors hover:text-gray-600">Saved</Link>
             <span className="text-gray-500">{session.user?.email}</span>
-            <button onClick={() => signOut()} className="underline">
+            <button onClick={() => signOut()} className="underline transition-colors hover:text-gray-600">
               Log out
             </button>
           </>
         ) : (
           <>
             <Link href="/login">Log in</Link>
-            <Link href="/signup" className="bg-black text-white px-3 py-1.5 rounded-lg">
+            <Link href="/signup" className="bg-black text-white px-3 py-1.5 rounded-lg transition-colors hover:bg-gray-800">
               Sign up
             </Link>
           </>

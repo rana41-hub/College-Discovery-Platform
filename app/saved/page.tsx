@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import BackButton from "@/app/BackButton";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +39,7 @@ export default async function SavedPage() {
 
     return (
         <div className="max-w-5xl mx-auto px-4 py-10">
+            <BackButton fallbackHref="/colleges" />
             <h1 className="text-3xl font-bold mb-8 tracking-tight text-gray-900">Saved Items</h1>
 
             <section className="mb-12">

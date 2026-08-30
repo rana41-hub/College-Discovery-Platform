@@ -21,28 +21,19 @@ export async function GET(request: NextRequest) {
 
     const where: any = {};
 
-    if (search) {
-      where.name = { contains: search, mode: "insensitive" };
-    }
-
-    if (location) {
-      where.location = { contains: location, mode: "insensitive" };
-    }
-
+    if (search) where.name = { contains: search, mode: "insensitive" };
+    if (location) where.location = { contains: location, mode: "insensitive" };
     if (minFees || maxFees) {
       where.fees = {};
       if (minFees) where.fees.gte = parseInt(minFees, 10);
       if (maxFees) where.fees.lte = parseInt(maxFees, 10);
     }
-
-    if (minRating) {
-      where.rating = { gte: parseFloat(minRating) };
-    }
+    if (minRating) where.rating = { gte: parseFloat(minRating) };
 
     const allowedSortFields = ["rating", "fees", "name"];
     const safeSortBy = allowedSortFields.includes(sortBy) ? sortBy : "rating";
 
-    const [colleges, total] = await Promise.all([
+    const [colleges, total, aggregate] = await Promise.all([
       prisma.college.findMany({
         where,
         orderBy: { [safeSortBy]: sortOrder },
@@ -50,6 +41,10 @@ export async function GET(request: NextRequest) {
         take: limit,
       }),
       prisma.college.count({ where }),
+      prisma.college.aggregate({
+        where,
+        _avg: { fees: true, rating: true },
+      }),
     ]);
 
     return NextResponse.json({
@@ -57,6 +52,10 @@ export async function GET(request: NextRequest) {
       total,
       page,
       totalPages: Math.ceil(total / limit),
+      stats: {
+        avgFees: aggregate._avg.fees ?? 0,
+        avgRating: aggregate._avg.rating ?? 0,
+      },
     });
   } catch (error) {
     console.error("GET /api/colleges error:", error);

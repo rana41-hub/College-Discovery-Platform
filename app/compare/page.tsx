@@ -1,4 +1,5 @@
 import SaveComparisonButton from "./SaveComparisonButton";
+import BackButton from "@/app/BackButton";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,7 @@ export default async function ComparePage({
   if (!searchParams.ids) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
+        <BackButton />
         <p className="text-gray-500">Select 2–3 colleges from the listing page to compare.</p>
       </div>
     );
@@ -30,6 +32,7 @@ export default async function ComparePage({
   if (!colleges || colleges.length < 2) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
+        <BackButton />
         <p className="text-gray-500">Couldn't load comparison. Try again.</p>
       </div>
     );
@@ -53,6 +56,7 @@ export default async function ComparePage({
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
+      <BackButton />
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Compare Colleges</h1>
         <SaveComparisonButton collegeIds={colleges.map((c: any) => c.id)} />
