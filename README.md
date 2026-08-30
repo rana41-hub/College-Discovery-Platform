@@ -27,10 +27,6 @@ PostgreSQL · Prisma ORM · NextAuth (Credentials + JWT)
   institutions), each with multiple courses at individual fee points,
   placement data, and reviews
 
-## What's NOT built (deliberately scoped out — see Loom video for reasoning)
-- Predictor Tool (feature 4 in the doc)
-- Q&A / Discussion (feature 5 in the doc)
-
 ## Setup
 
 1. Install dependencies:
@@ -86,7 +82,7 @@ Note: several pages and API routes are marked `export const dynamic =
 queries (search params, session data) that can't be resolved at build time,
 so Next.js can't statically pre-render them.
 
-## Architecture notes (for review / Loom video)
+## Architecture notes (for review)
 
 - **Courses have their own fees**, modeled as a separate `Course` table
   related to `College`, rather than a flat fee on the college itself — a
